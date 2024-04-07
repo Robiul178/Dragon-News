@@ -8,9 +8,6 @@ import NewsCard from '../Pages/NewsCard/NewsCard';
 const Home = () => {
     const news = useLoaderData();
 
-
-
-
     return (
         <div className='max-w-[1400px] mx-auto'>
             <Shared></Shared>
@@ -20,7 +17,7 @@ const Home = () => {
                 </div>
                 <div className='md:col-span-2'>
                     {
-                        news.map(aNews => <NewsCard
+                        news?.map(aNews => <NewsCard
                             key={aNews._id}
                             news={aNews}
                         ></NewsCard>)

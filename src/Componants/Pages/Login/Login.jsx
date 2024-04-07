@@ -1,13 +1,16 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Shared from "../../Shared/Shared/Shared";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Login = () => {
     const [login, setLogin] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { singInUser } = useContext(AuthContext);
 
-    const { singInUser } = useContext(AuthContext)
+    console.log('from login', location)
 
     const handleFormSubmit = e => {
         e.preventDefault()
@@ -17,17 +20,19 @@ const Login = () => {
         // console.log(email, password)
         singInUser(email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
-                console.log('login', user)
-                setLogin('Login SucessFully')
+                console.log('login', user);
+                setLogin('Login SucessFully');
+
+
+                //navigate after login
+                navigate(location?.state ? location.state : '/')
             })
             .catch((error) => {
                 const errorMessage = error.message;
                 console.log(errorMessage)
             });
     }
-
 
     return (
         <div>

@@ -11,6 +11,7 @@ import Login from './Componants/Pages/Login/Login.jsx';
 import Registration from './Componants/Pages/Register/Registration.jsx';
 import AuthProvider from './Componants/AuthProvider/AuthProvider.jsx';
 import NewsDetails from './Componants/Pages/NewsDetails/NewsDetails.jsx';
+import PrivetRoute from './Componants/PrivetRoute/PrivetRoute.jsx';
 
 
 const router = createBrowserRouter([
@@ -21,11 +22,14 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('news.json')
+        loader: () => fetch('/news.json')
       },
       {
         path: '/news/:id',
-        element: <NewsDetails></NewsDetails>
+        element: <PrivetRoute>
+          <NewsDetails></NewsDetails>
+        </PrivetRoute>
+        // loader: () => fetch('news.json')
       },
       {
         path: '/login',
